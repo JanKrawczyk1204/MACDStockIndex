@@ -1,7 +1,3 @@
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import datetime
 
 def calculateEMA(sorce_collumn, day, n):
     ema_nominator = sorce_collumn[day]

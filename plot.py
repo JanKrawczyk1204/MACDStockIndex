@@ -1,7 +1,5 @@
-import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
-import datetime
+
 
 def showPrices(data):
     plt.plot(data.Price)
@@ -18,3 +16,5 @@ def showMACD(data):
     plt.title("MACD")
     plt.legend()
     plt.show()
+
+#def showPricesWithBuyAndSell(data, buy_date, sell_date):
