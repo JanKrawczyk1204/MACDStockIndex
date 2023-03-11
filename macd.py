@@ -3,26 +3,26 @@ import numpy as np
 import matplotlib.pyplot as plt
 import datetime
 
-def calculateEMA(data, day, n):
-    ema_nominator = data.Price[day]
+def calculateEMA(sorce_collumn, day, n):
+    ema_nominator = sorce_collumn[day]
     ema_denominator = 1
     alpha = 2 / (n-1)
     for i in range(1, n+1):
-        ema_nominator += pow(1-alpha, i)*data.Price[day-i]
+        ema_nominator += pow(1-alpha, i)*sorce_collumn[day-i]
         ema_denominator += pow(1-alpha, i)
     return ema_nominator/ema_denominator
 
-def addEMCToData(data, precision, collumn_name):
+def addEMCToData(sorce_collumn, precision):
     ema = []
-    for i in range(0,precision):
+    for i in range(0, precision):
         ema.append(0)
-    for i in range(precision,1000):
-        ema.append(calculateEMA(data, i, precision))
-    data[collumn_name] = ema
+    for i in range(precision, 1000):
+        ema.append(calculateEMA(sorce_collumn, i, precision))
+    return ema
 
 def calculateMACD(data):
-    addEMCToData(data, 26, 'EMC26')
-    addEMCToData(data, 12, 'EMC12')
+    data['EMC26'] = addEMCToData(data.Price, 26)
+    data['EMC12'] = addEMCToData(data.Price, 12)
     macd = []
     for i in range(0, 26):
         macd.append(0)
@@ -31,20 +31,10 @@ def calculateMACD(data):
     data['MACD'] = macd
     calculateSignal(data)
 
-def calculateOneSignal(data, day):
-    ema_nominator = data.MACD[day]
-    ema_denominator = 1
-    alpha = 4
-    for i in range(1, 10):
-        ema_nominator += pow(1-alpha, i)*data.MACD[day-i]
-        ema_denominator += pow(1-alpha, i)
-    return ema_nominator/ema_denominator
-
-
 def calculateSignal(data):
     signal = []
     for i in range(0, 35):
         signal.append(0)
     for i in range(35, 1000):
-        signal.append(calculateOneSignal(data, i))
+        signal.append(calculateEMA(data.MACD, i, 9))
     data['Signal'] = signal
