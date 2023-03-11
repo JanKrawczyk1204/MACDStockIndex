@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 import datetime
 
 def calculateEMA(data, day, n):
-    ema_nominator = data.Close[day]
+    ema_nominator = data.Price[day]
     ema_denominator = 1
     alpha = 2 / (n-1)
     for i in range(1, n+1):
-        ema_nominator += pow(1-alpha, i)*data.Close[day-i]
+        ema_nominator += pow(1-alpha, i)*data.Price[day-i]
         ema_denominator += pow(1-alpha, i)
     return ema_nominator/ema_denominator
 

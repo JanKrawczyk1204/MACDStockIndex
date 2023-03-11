@@ -1,6 +1,8 @@
 import pandas as pd
 
 def importData(path):
-    data = pd.read_csv(path)
-    data = data.drop(['High', 'Low', 'Open', 'Adj Close', 'Volume'], 1)
+    raw_data = pd.read_csv(path)
+    data = pd.DataFrame()
+    data['Date'] = raw_data.Date
+    data['Price'] = raw_data.Close
     return data
