@@ -8,9 +8,6 @@ from plot import showPrices, showMACD
 
 if __name__ == '__main__':
         data = importData("MSFT.csv")
-        addEMCToData(data, 26, 'EMC26')
-        addEMCToData(data, 12, 'EMC12')
-        calculateMACD(data)
-        calculateSignal(data)
         showPrices(data)
+        calculateMACD(data)
         showMACD(data)

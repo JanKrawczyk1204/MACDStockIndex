@@ -21,13 +21,15 @@ def addEMCToData(data, precision, collumn_name):
     data[collumn_name] = ema
 
 def calculateMACD(data):
+    addEMCToData(data, 26, 'EMC26')
+    addEMCToData(data, 12, 'EMC12')
     macd = []
     for i in range(0, 26):
         macd.append(0)
     for i in range(26, 1000):
         macd.append(data.EMC26[i] - data.EMC12[i])
     data['MACD'] = macd
-
+    calculateSignal(data)
 
 def calculateOneSignal(data, day):
     ema_nominator = data.MACD[day]
