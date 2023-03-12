@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-
+from buysale import buyAndSellToData
 
 def showPrices(data):
     plt.plot(data.Price)
@@ -17,4 +17,10 @@ def showMACD(data):
     plt.legend()
     plt.show()
 
-#def showPricesWithBuyAndSell(data, buy_date, sell_date):
+def showPricesWithBuyAndSell(data):
+    buy_price, buy_day, sell_price, sell_day = buyAndSellToData(data)
+    plt.plot(buy_day, buy_price, 'go', label='Buy')
+    plt.plot(sell_day, sell_price, 'bo', label='Sell')
+    plt.plot(data.Price, label='Price')
+    plt.legend()
+    plt.show()
