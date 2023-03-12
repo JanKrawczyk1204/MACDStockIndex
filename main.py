@@ -2,6 +2,7 @@ from file import importData
 from macd import calculateMACD
 from plot import showPrices, showMACD, showPricesWithBuyAndSell
 from buysale import buyAndSellDate, buyAndSellToData
+from simulation import simulateStockMarket
 
 if __name__ == '__main__':
         data = importData("MSFT.csv")
@@ -12,3 +13,4 @@ if __name__ == '__main__':
         print(buy_date)
         print(sell_date)
         showPricesWithBuyAndSell(data)
+        simulateStockMarket(data, 1000)
