@@ -12,6 +12,7 @@ def buyAndSellDate(data):
             sell_date.append(data.Date[i])
     return buy_date, sell_date
 
+
 def buyAndSellToData(data):
     buy_price = []
     buy_day = []
@@ -24,4 +25,21 @@ def buyAndSellToData(data):
         if data.MACD[i-1] > data.Signal[i-1] and data.MACD[i] <= data.Signal[i]:
             sell_price.append(data.Price[i])
             sell_day.append(i)
+    return buy_price, buy_day, sell_price, sell_day
+
+def betterBuyAndSellToData(data):
+    buy_price = []
+    buy_day = []
+    sell_price = []
+    sell_day = []
+    buy = True
+    for i in range(1, 1000):
+        if data.MACD[i-1] < data.Signal[i-1] and data.MACD[i] >= data.Signal[i] and data.Price[i] < data.TrendLine[i] and buy:
+            buy_price.append(data.Price[i])
+            buy_day.append(i)
+            buy = False
+        if data.MACD[i-1] > data.Signal[i-1] and data.MACD[i] <= data.Signal[i] and data.Price[i] > data.TrendLine[i] and not buy:
+            sell_price.append(data.Price[i])
+            sell_day.append(i)
+            buy = True
     return buy_price, buy_day, sell_price, sell_day

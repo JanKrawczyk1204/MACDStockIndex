@@ -34,3 +34,19 @@ def calculateSignal(data):
     for i in range(35, 1000):
         signal.append(calculateEMA(data.MACD, i, 9))
     data['Signal'] = signal
+
+def calculateTradeLine(data):
+    trend_line = []
+    for i in range(0, 10):
+        trend_line.append(90)
+    for i in range(10, 20):
+        trend_line.append(calculateEMA(data.Price, i, 10))
+    for i in range(20, 50):
+            trend_line.append(calculateEMA(data.Price, i, 20))
+    for i in range(50, 100):
+        trend_line.append(calculateEMA(data.Price, i, 50))
+    for i in range(100, 200):
+        trend_line.append(calculateEMA(data.Price, i, 100))
+    for i in range(200, 1000):
+        trend_line.append(calculateEMA(data.Price, i, 200))
+    data['TrendLine'] = trend_line
