@@ -1,7 +1,7 @@
 from file import importData
 from macd import calculateMACD, calculateTradeLine
 from plot import showPrices, showMACD, showPricesWithBuyAndSell, showPriceswithTrandLine
-from buysale import buyAndSellDate, buyAndSellToData
+from buysale import buyAndSellDate
 from simulation import simulateStockMarket, betterStockSimulation
 
 if __name__ == '__main__':
@@ -15,6 +15,5 @@ if __name__ == '__main__':
         showPricesWithBuyAndSell(data)
         simulateStockMarket(data, 1000)
         calculateTradeLine(data)
-        print(data.head())
         showPriceswithTrandLine(data)
         betterStockSimulation(data, 1000)
